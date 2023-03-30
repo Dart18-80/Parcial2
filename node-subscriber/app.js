@@ -66,6 +66,22 @@ app.post('/B', (req, res) => {
     res.sendStatus(200);
 });
 
+app.post('/verificarTexto', async (req, res) =>{
+    const verifiacion = req.body.data.message;
+    if(!verifiacion.includes("Ingeniero") || !verifiacion.includes("ingeniero")){
+        const messageSend = {
+            message: verifiacion,
+          };
+        const response = await axios.post(`${daprUrl}/publish/Compressed`, messageSend);
+        console.log('El texto paso la verificacion: ', verifiacion);
+        return response
+    }
+    else{
+        console.log('El texto no paso la verificacion: ', verifiacion);
+        res.sendStatus(400);
+    }
+})
+
 app.post('/Compressed', async (req, res) => {
     console.log("Decompressed Text: ", req.body.data.message);
     var compressed = lzbase62.compress(req.body.data.message);

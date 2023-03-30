@@ -24,6 +24,11 @@ app.MapPost("/C", [Topic("pubsub", "C")] (ILogger<Program> logger, Dictionary<st
     return Results.Ok();
 });
 
+app.MapPost("/verificarTexto", [Topic("pubsub", "verificarTexto")] (ILogger<Program> logger, Dictionary<string, string> item) => {
+    Console.WriteLine($"{item["messageType"]}: {item["message"]}");
+    return Results.Ok();
+});
+
 app.MapPost("/resultado", [Topic("pubsub", "resultado")] (ILogger<Program> logger, Dictionary<string, string> item) =>
 {
   Console.WriteLine("Compressed Text:");
