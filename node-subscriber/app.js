@@ -72,7 +72,7 @@ app.post('/verificarTexto', async (req, res) =>{
         const messageSend = {
             message: verifiacion,
           };
-        const response = await axios.post(`${daprUrl}/publish/Compressed`, messageSend);
+        const response = await axios.post(`/Compressed`, messageSend);
         console.log('El texto paso la verificacion: ', verifiacion);
         return response
     }
